@@ -22,15 +22,15 @@ public class GAEConEclipseServlet extends HttpServlet {
    if(request.getParameter("action").equals("create")){
      String autor = request.getParameter("autor");
      String tutorial = request.getParameter("tutorial");
-     TutorialUtil.insertar(autor, tutorial);
+     TurorialUtil.insertar(autor, tutorial);
      request.setAttribute("autor", autor);
-     //List<Tutorial> tutorials = TutorialUtil.tutorialesPorAutor(autor);
-     List<Tutorial> tutorials = TutorialUtil.todosLosTutoriales();
+     //List<Sprint> tutorials = TurorialUtil.tutorialesPorAutor(autor);
+     List<Tutorial> tutorials = TurorialUtil.todosLosTutoriales();
      request.setAttribute("tutorials", tutorials);
      RequestDispatcher rd =  getServletContext().getRequestDispatcher("/Principal.jsp");
     rd.forward(request, response);
    }/*else if(request.getParameter("action").equals("show")){
-     List<Tutorial> tutorials = TutorialUtil.todosLosTutoriales();
+     List<Sprint> tutorials = TurorialUtil.todosLosTutoriales();
      request.setAttribute("showFullTutorials", tutorials);
      RequestDispatcher rd = getServletContext().getRequestDispatcher("/Principal.jsp");
      rd.forward(request, response);

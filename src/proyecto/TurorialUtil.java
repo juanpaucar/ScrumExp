@@ -7,7 +7,7 @@ import javax.jdo.Query;
 
 import com.epn.edu.ec.PMF;
 
-public class TutorialUtil {
+public class TurorialUtil {
 //Cuantos datos mostrara en la consulta
 private final static int FETCH_MAX_RESULTS = 20;
 //Metodo para insertar un dato

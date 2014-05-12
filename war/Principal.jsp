@@ -1,9 +1,9 @@
 <%@page import="proyecto.*" %>
 <%@page import="java.util.*"%>
-<%@page import="proyecto.TutorialUtil"%>
+<%@page import="proyecto.TurorialUtil"%>
 
 <%
-List<Tutorial> tutorials =TutorialUtil.todosLosTutoriales();
+	List<Tutorial> tutorials =TurorialUtil.todosLosTutoriales();
 %>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
