@@ -13,13 +13,13 @@ import com.epn.edu.ec.PMF;
 public class UsuarioUtils {
 	private static final int FETCH_MAX_RESULTS = 10;
 	
-	public static void insert(final String nombreProyecto,final String fecha, final String descripcionProyecto) {
+	public static void insert(final String nombreUsuario,final String emailUsuario, final String contraseniaUsuario) {
 		
 		// recuperacion del gestor de persistencia de JDO
 		final PersistenceManager persistenceManager = PMF.get().getPersistenceManager();
 		
 		// creamos un nuevo tutorial y los insertamos en el datastore
-		final Usuario usuario = new Usuario(nombreProyecto,fecha, descripcionProyecto);		
+		final Usuario usuario = new Usuario(nombreUsuario,emailUsuario, contraseniaUsuario);		
 		persistenceManager.makePersistent(usuario);
 	}
 	@SuppressWarnings("unchecked")

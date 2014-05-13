@@ -14,6 +14,7 @@ public class ProductBacklog {
 	
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+	@Key
 	private Key key;
 	
 	@Persistent(mappedBy = "productBacklog")

@@ -1,6 +1,8 @@
 package com.scrumexp.objects;
 
 
+import java.util.List;
+
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
@@ -31,6 +33,9 @@ public class Story {
 
 	@Persistent
 	private ProductBacklog productBacklog;
+	
+	@Persistent
+	private List<Task> tasks;
 
 	public Story(String title, String description, int estimatedValue,
 			int estimatedWork, Sprint sprint, ProductBacklog productBacklog) {

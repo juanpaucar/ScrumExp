@@ -1,20 +1,25 @@
 package com.scrumexp.objects;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
+import javax.jdo.annotations.Key;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
+
+import login.Usuario;
 
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class Project {
 
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-	private Long id;
+	@Key
+	private Key key;
 	
 	@Persistent
 	private String title;
@@ -26,6 +31,9 @@ public class Project {
 	private List<String> members;
 	
 	@Persistent
+	private Usuario creator;
+	
+	@Persistent
 	private Date creationDate;
 
 	@Persistent
@@ -34,16 +42,19 @@ public class Project {
 	@Persistent
 	private ProductBacklog productBacklog;
 
-	public Project(String title, String description, List<String> members,
-			Date creationDate, List<Sprint> sprints, ProductBacklog productBacklog) {
+
+
+	public Project(String title, String description, String member, Usuario creator) {
 		super();
 		this.title = title;
 		this.description = description;
-		this.members = members;
-		this.creationDate = creationDate;
-		this.sprints = sprints;
-		this.productBacklog = productBacklog;
+		this.members =  new ArrayList<String>();
+		this.members.add(member);
+		this.creator = creator;
+		this.creationDate = new Date();
 	}
+
+
 
 	public String getTitle() {
 		return title;
@@ -71,10 +82,6 @@ public class Project {
 
 	public Date getCreationDate() {
 		return creationDate;
-	}
-
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
 	}
 
 	public List<Sprint> getSprints() {

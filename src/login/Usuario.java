@@ -1,10 +1,14 @@
 package login;
 
+import java.util.List;
+
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
+
+import com.scrumexp.objects.Project;
 
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class Usuario {
@@ -20,6 +24,9 @@ public class Usuario {
 	
 	@Persistent
 	private String contraseniausuarios;
+	
+	@Persistent
+	private List<Project> projects;
 	
 	public Usuario(){
 		super();
