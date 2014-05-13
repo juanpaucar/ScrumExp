@@ -23,7 +23,7 @@ public class SprintStore {
 		query.setFilter("project == projectParam");
 		query.setOrdering("startDate ASC");
 		query.declareParameters("Project projectParam");
-		return (List<Sprint>)query.execute();
+		return (List<Sprint>)query.execute(project);
 	}
 
 }
