@@ -1,12 +1,13 @@
 package com.scrumexp.objects;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
+
+import com.google.appengine.api.datastore.Key;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
-import javax.jdo.annotations.Key;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
@@ -18,7 +19,6 @@ public class Project {
 
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-	@Key
 	private Key key;
 	
 	@Persistent
@@ -28,10 +28,7 @@ public class Project {
 	private String description;
 	
 	@Persistent
-	private List<String> members;
-	
-	@Persistent
-	private Usuario creator;
+	private Set<Key> users;
 	
 	@Persistent
 	private Date creationDate;
@@ -39,22 +36,18 @@ public class Project {
 	@Persistent
 	private List<Sprint> sprints;
 	
-	@Persistent
+	@Persistent (defaultFetchGroup="true")
 	private ProductBacklog productBacklog;
 
-
-
-	public Project(String title, String description, String member, Usuario creator) {
+	public Project(String title, String description,List<Sprint> sprints, ProductBacklog productBacklog) {
 		super();
 		this.title = title;
 		this.description = description;
-		this.members =  new ArrayList<String>();
-		this.members.add(member);
-		this.creator = creator;
+		this.sprints = sprints;
+		this.productBacklog = productBacklog;
 		this.creationDate = new Date();
+		
 	}
-
-
 
 	public String getTitle() {
 		return title;
@@ -72,16 +65,20 @@ public class Project {
 		this.description = description;
 	}
 
-	public List<String> getMembers() {
-		return members;
+	public Set<Key> getUsers() {
+		return users;
 	}
 
-	public void setMembers(List<String> members) {
-		this.members = members;
+	public void setUsers(Set<Key> users) {
+		this.users = users;
 	}
 
 	public Date getCreationDate() {
 		return creationDate;
+	}
+
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
 	}
 
 	public List<Sprint> getSprints() {
@@ -99,6 +96,22 @@ public class Project {
 	public void setProductBacklog(ProductBacklog productBacklog) {
 		this.productBacklog = productBacklog;
 	}
+
+	public Key getKey() {
+		return key;
+	}
 	
-	
+	public void addUser(Usuario usuario) {
+		System.out.println("ENTRE");
+		users.add(usuario.getKey());
+		System.out.println("2DA LINEA");
+		usuario.getProjects().add(getKey());
+		System.out.println("ACABE");
+	}
+
+	public void removeUser(Usuario usuario) {
+		users.remove(usuario.getKey());
+		usuario.getProjects().remove(getKey());
+	}
+
 }

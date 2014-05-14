@@ -70,7 +70,7 @@
 						<img alt="" src="/img/3.png"  ></img>
 						<div class="carousel-caption">
 							<h4>
-								First Thumbnail labe l
+								
 							</h4>
 							<p>
 								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
@@ -136,8 +136,9 @@
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 	
 										
 				<a class="btn btn-default" href="Usuarios.jsp" style="width: 338px; ">Registrar</a>
+				<p hidden="true">
 				<a class="btn btn-default" href="ListarUsuarios.jsp" style="width: 338px; " hidden="true" >Listar</a>								
-					
+				</p>	
 				
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">

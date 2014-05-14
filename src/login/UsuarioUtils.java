@@ -54,4 +54,21 @@ public class UsuarioUtils {
 		return null;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public static Usuario geUsuario(String email) {
+		final PersistenceManager persistenceManager = PMF.get().getPersistenceManager();
+		String query = " select from " +
+				 Usuario.class.getName() +
+				 " where emailusuarios == '" +
+				  email+ "'";
+		List<Usuario> lista = (List<Usuario>)persistenceManager.newQuery(query).execute();
+		if (lista.size()>=1) {
+			return lista.get(0);
+		}
+		return null;
+	}
+	
+	/*@SuppressWarnings("unchecked")
+	public*/
+	
 }

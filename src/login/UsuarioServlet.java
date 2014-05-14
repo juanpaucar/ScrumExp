@@ -53,8 +53,8 @@ public class UsuarioServlet extends HttpServlet {
 			String respuesta="";
 			List<Usuario> lista= UsuarioUtils.getEntries();
 			for (Usuario usuario : lista) {
-				if (usuario.getNombreusuarios().equals(username)) {				
-					return "<p>El nombre de usuario que ha seleccionado ya está ocupado, por favor seleccione otro<p>";
+				if (usuario.getNombreusuarios().equals(username) || usuario.getEmailusuarios().equals(email)) {				
+					return "<p>El nombre de usuario o correo que ha seleccionado ya está ocupado, por favor seleccione otro<p>";
 				}
 			}
 			if (username.length()<3 || password.length()<3) {

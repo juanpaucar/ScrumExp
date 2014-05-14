@@ -16,6 +16,18 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
      <servlet-name>tutorial</servlet-name>
      <servlet-class>proyecto.GAEConEclipseServlet</servlet-class>
   </servlet>
+  <servlet>
+      <servlet-name>nproject</servlet-name>
+      <servlet-class>com.scrumexp.servlets.NewProjectServlet</servlet-class>
+  </servlet>
+  <servlet>
+<servlet-name>Historia</servlet-name>
+<servlet-class>historiasUsuario.HistoriaServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+<servlet-name>Historia</servlet-name>
+<url-pattern>/Historia</url-pattern>
+</servlet-mapping>
   <servlet-mapping>
      <servlet-name>tutorial</servlet-name>
      <url-pattern>/tutorial</url-pattern>
@@ -27,6 +39,10 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	<servlet-mapping>
 		<servlet-name>master</servlet-name>
 		<url-pattern>/master</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+	    <servlet-name>nproject</servlet-name>
+	    <url-pattern>/nproject</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>

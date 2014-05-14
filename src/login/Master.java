@@ -7,7 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
 
 @SuppressWarnings("serial")
 public class Master extends HttpServlet{
@@ -20,7 +20,7 @@ public class Master extends HttpServlet{
 		
 			Usuario resultado= UsuarioUtils.getUsuario(emailusuarios, contraseniausuarios);
 			if (resultado!=null) {
-				RequestDispatcher rd = getServletContext().getRequestDispatcher("/Principal.jsp");
+				RequestDispatcher rd = getServletContext().getRequestDispatcher("/projects.jsp");
 				rd.forward(req, resp);
 			}else{
 				resp.sendRedirect("/index.jsp");

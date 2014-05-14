@@ -2,9 +2,10 @@ package com.scrumexp.objects;
 
 import java.util.List;
 
+import com.google.appengine.api.datastore.Key;
+
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
-import javax.jdo.annotations.Key;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
@@ -14,7 +15,6 @@ public class ProductBacklog {
 	
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-	@Key
 	private Key key;
 	
 	@Persistent(mappedBy = "productBacklog")

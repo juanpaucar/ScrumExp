@@ -1,6 +1,5 @@
 package com.scrumexp.objectsStore;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
@@ -9,33 +8,37 @@ import javax.jdo.Query;
 import login.Usuario;
 
 import com.epn.edu.ec.PMF;
-import com.scrumexp.objects.Project;;
+import com.scrumexp.objects.Project;
+import com.google.appengine.api.datastore.Key;
 
 public class ProjectStore {
 	
-	public void insertProject(String title, String description, String userEmail, Usuario usuario) {
+	public static void insertProject(Project project) {
 		final PersistenceManager persistenceManager = PMF.get().getPersistenceManager();
-		final Project project = new Project(title, description, userEmail, usuario);
-		persistenceManager.makePersistent(project);
+		final Project finalProject = project;
+		persistenceManager.makePersistent(finalProject);
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Project> getEntries(Usuario usuario) {
+	public static List<Project> getEntries(Usuario usuario) {
 		final PersistenceManager persistenceManager = PMF.get().getPersistenceManager();
 		final Query query = persistenceManager.newQuery(Project.class);
-		final String email=usuario.getEmailusuarios();
-		List<Project> projects = (List<Project>)query.execute();
-		List<Project> projectsByUser = new ArrayList<Project>();
- 		for (Project project : projects) {
-			List<String> memebers = project.getMembers();
-			for (String member : memebers) {
-				if (member.equals(email)) {
-					projectsByUser.add(project);
-					break;
-				}
-			}
-		}
- 		return projectsByUser;
+		/*query.setFilter("projects == projectsParam");
+		query.declareParameters("Set<Key> projectsParam");*/
+		List<Project> projects = (List<Project>) query.execute();
+		return projects;
+	}
+	
+	@SuppressWarnings("uncheked")
+	public static Project getProject(Key projectKey) {
+		final PersistenceManager persistenceManager = PMF.get().getPersistenceManager();
+		final Query query = persistenceManager.newQuery(Project.class);
+		query.setFilter("key == keyParam");
+		query.declareParameters(Key.class.getName() + " keyParam");
+		List<Project> projects = (List<Project>) query.execute(projectKey);
+		if (projects.size()>=1)
+			return projects.get(0);
+		return null;
 	}
 	
 	
