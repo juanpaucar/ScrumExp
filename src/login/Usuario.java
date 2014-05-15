@@ -35,10 +35,14 @@ public class Usuario {
 		super();
 		
 	}
-	public Usuario(String nombreusuarios, final String emailusuarios, final String contraseniausurios){
+	public Usuario(String nombreusuarios, final String emailusuarios, final String contraseniausurios, final Key key){
 		this.nombreusuarios=nombreusuarios;
 		this.emailusuarios=emailusuarios;
-		this.contraseniausuarios=contraseniausurios;			
+		this.contraseniausuarios=contraseniausurios;	
+		this.setKey(key);
+	}
+	public void setKey(Key key) {
+		this.key = key;
 	}
 	public String getNombreusuarios() {
 		return nombreusuarios;

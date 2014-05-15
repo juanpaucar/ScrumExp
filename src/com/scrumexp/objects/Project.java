@@ -23,7 +23,7 @@ public class Project {
 	
 	@Persistent
 	private String title;
-	
+
 	@Persistent
 	private String description;
 	
@@ -39,16 +39,20 @@ public class Project {
 	@Persistent (defaultFetchGroup="true")
 	private ProductBacklog productBacklog;
 
-	public Project(String title, String description,List<Sprint> sprints, ProductBacklog productBacklog) {
+	public Project(String title, String description,List<Sprint> sprints, ProductBacklog productBacklog, Key key) {
 		super();
 		this.title = title;
 		this.description = description;
 		this.sprints = sprints;
 		this.productBacklog = productBacklog;
 		this.creationDate = new Date();
-		
+		this.setKey(key);
 	}
 
+	public void setKey(Key key) {
+		this.key = key;
+	}
+	
 	public String getTitle() {
 		return title;
 	}
