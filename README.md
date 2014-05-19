@@ -1,7 +1,7 @@
 ScrumExp
 ========
 
-* Distributed under GLPv2, please refer to LICENSE
+#####Distributed under GLPv2, please refer to LICENSE
 ===================================================
 
 #####Español
