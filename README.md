@@ -2,8 +2,8 @@ ScrumExp
 ========
 
 Distributed under GLPv2, please refer to LICENSE
-
 ===================================================
+
 #####Español
 Aplicación para control de las metodologías Scrum y XP
 
@@ -11,6 +11,7 @@ Este software está diseñado para Google App Engine con Java, usa el framework 
 
 Es mi primer proyecto web con Java así que es probable que existan algunos errores obvios para desarrolladores avanzados, de plataformas web, si puedes detectar un error en el sistemas por favor no dudes en contactarme para poder corregirlo, la idea es que al menos pueda ser usado por las personas que necesiten una manera simple de control de sus proyectos que usen estas metodologías, se encuentra desplegado en http://scrumexp.appspot.com/ 
 
+=======================================================
 #####English
 Application made for Scrum & XP methodologies control
 
