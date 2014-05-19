@@ -2,7 +2,8 @@ ScrumExp
 ========
 
 Distributed under GLPv2, please refer to LICENSE
- 
+
+===================================================
 #####Español
 Aplicación para control de las metodologías Scrum y XP
 
