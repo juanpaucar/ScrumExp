@@ -30,7 +30,7 @@ public class Sprint {
 	@Persistent
 	private Project project;
 	
-	@Persistent
+	@Persistent(mappedBy="sprint")
 	@Order(extensions = @Extension(vendorName="datanucleus", key="list-ordering", value="estimatedValue desc"))
 	private List<Story> userStories;
 

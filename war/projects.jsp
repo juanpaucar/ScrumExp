@@ -1,18 +1,19 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List" %>
 <%@page import="login.UsuarioUtils"%>
-<%@page import="login.Usuario"%>
+<%@page import="com.scrumexp.objects.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.scrumexp.objects.*" %>
 <%@ page import="com.scrumexp.objectsStore.*" %>
 <%@ page import="java.util.Set"%>
 <%@ page import="com.google.appengine.api.datastore.Key"%>
+<%@ page import="javax.servlet.http.HttpSession" %>
 
 
 
 <%  
-	Usuario usuario = UsuarioUtils.geUsuario("imbaqcas_21@hotmail.com");
+	Usuario usuario = (Usuario) session.getAttribute("user");
 	String currentUser;
 	String autor = "VACIO";
 	if (usuario==null) {
@@ -84,7 +85,7 @@
 				
 					<ul class="nav navbar-nav navbar-right">
 						<li>
-							<a href="http://scrumexp.appspot.com">Salir</a>
+							<a href="/index.jsp" onclick="deleteAllCookies()">Salir</a>
 						</li>
 						
 					</ul>
@@ -98,41 +99,36 @@
 					HOLA!<br><small><%=currentUser%></small>
 				</h1>
 			</div>
-
-
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<h3 class="panel-title">
 						Proyectos
 					</h3>
 				</div>
-				<% List<Project> projects = ProjectStore.getEntries(usuario);
-				
+				<% List<Project> projects = ProjectStore.getEntries(usuario);		
 					if (projects.size()<1) {%>
 					<p><strong>NO TIENE PROYECTOS REGISTRADOS</strong> <p>
 				<%}
-					else { 
+					else { %>
+						<form action="/main" method="post">
+							<input type="hidden" id="project-title" name="project-title" value="">
 				
-				   		for (Project project: projects) {%>
+				   		<%for (Project project: projects) {%>
 							<div class="panel-body">
-								<strong>Titulo:</strong><br> <%=project.getTitle()%> <br><br>
-								<p>
-									<strong>Descripcion:</strong><br>
-									<%=project.getDescription() %>
-								</p>
-								<p> 
-									<strong>Fecha de creacion:</strong><br>
-									<%=project.getCreationDate()%>
-								</p>								
-									<form action="/main" method="post">
-										<p hidden="true"><input type="text" name="project-key" value="<%=project.getKey()%>"></p>
-										<%System.out.println("la key: "+project.getKey()); %>
-										<button type="submit" class="btn btn-info" formaction="/Historia.jsp">Ir</button>
-									</form>
+									<strong>Titulo:</strong><br> <%=project.getTitle()%> <br><br>
+									<p>
+										<strong>Descripcion:</strong><br>
+										<%=project.getDescription() %>
+									</p>
+									<p> 
+										<strong>Fecha de creacion:</strong><br>
+										<%=project.getCreationDate()%>
+									</p>
+										<button type="submit" class="btn btn-info btn-block" onClick="project('<%=project.getTitle()%>')" >Ir</button>
 									<br><br><br>	
 							</div>
 						<%} %>
-					
+						</form>
 				<% } %>
 				<div class="panel-footer">
 				
@@ -159,10 +155,7 @@
 						 					<label for="description">Descripcion</label>
 						 					<input type="textarea" class="form-control" name="description" />
 										</p>
-										<p hidden="true">
-											<label for="description">autor</label>
-						 					<input type="text" class="form-control" name="autor" value="<%=autor%>"/>
-										</p>
+
 
 
 								</div>
@@ -189,6 +182,25 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+		function project(title) {
 
+			var element = document.getElementById("project-title");
+			element.value = title;
+		}
+</script>
+
+<script type="text/javascript">
+		function deleteAllCookies() {
+		    var cookies = document.cookie.split(";");
+
+		    for (var i = 0; i < cookies.length; i++) {
+		    	var cookie = cookies[i];
+		    	var eqPos = cookie.indexOf("=");
+		    	var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+		    	document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+		    }
+		}
+</script>
 </body>
 </html>

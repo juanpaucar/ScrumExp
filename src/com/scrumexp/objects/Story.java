@@ -23,6 +23,12 @@ public class Story {
 	private String description;
 	
 	@Persistent
+	private String acceptanceCriteria;
+	
+	@Persistent
+	private boolean accomplished;
+	
+	@Persistent
 	private int estimatedValue;
 	
 	@Persistent
@@ -34,11 +40,11 @@ public class Story {
 	@Persistent
 	private ProductBacklog productBacklog;
 	
-	@Persistent
+	@Persistent(mappedBy="story")
 	private List<Task> tasks;
 
 	public Story(String title, String description, int estimatedValue,
-			int estimatedWork, Sprint sprint, ProductBacklog productBacklog) {
+			int estimatedWork, Sprint sprint, ProductBacklog productBacklog, String acceptanceCriteria) {
 		super();
 		this.title = title;
 		this.description = description;
@@ -46,6 +52,8 @@ public class Story {
 		this.estimatedWork = estimatedWork;
 		this.sprint = sprint;
 		this.productBacklog = productBacklog;
+		this.acceptanceCriteria = acceptanceCriteria;
+		this.accomplished=false;
 	}
 
 	public String getTitle() {
@@ -94,6 +102,38 @@ public class Story {
 
 	public void setProductBacklog(ProductBacklog productBacklog) {
 		this.productBacklog = productBacklog;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getAcceptanceCriteria() {
+		return acceptanceCriteria;
+	}
+
+	public void setAcceptanceCriteria(String acceptanceCriteria) {
+		this.acceptanceCriteria = acceptanceCriteria;
+	}
+
+	public boolean isAccomplished() {
+		return accomplished;
+	}
+
+	public void setAccomplished(boolean accomplished) {
+		this.accomplished = accomplished;
+	}
+
+	public List<Task> getTasks() {
+		return tasks;
+	}
+
+	public void setTasks(List<Task> tasks) {
+		this.tasks = tasks;
 	}
 	
 }

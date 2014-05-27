@@ -7,21 +7,31 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.scrumexp.objects.Usuario;
 
 
 @SuppressWarnings("serial")
 public class Master extends HttpServlet{
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		this.doPost(req, resp);
+	}
 		
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 		throws ServletException, IOException { 
-			
 			String emailusuarios=req.getParameter("emailusuario"); 
 			String contraseniausuarios=req.getParameter("contraseniausuario"); 
-		
 			Usuario resultado= UsuarioUtils.getUsuario(emailusuarios, contraseniausuarios);
 			if (resultado!=null) {
+				HttpSession session=req.getSession();
+				session.setAttribute("user", resultado);
 				RequestDispatcher rd = getServletContext().getRequestDispatcher("/projects.jsp");
 				rd.forward(req, resp);
+				
 			}else{
 				resp.sendRedirect("/index.jsp");
 			}

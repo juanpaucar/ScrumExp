@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@page import="java.util.*"%>
 <%@page import="login.*"%>
-<%@page import="login.Usuario"%>
+<%@page import="com.scrumexp.objects.Usuario"%>
 <%@page import="login.UsuarioUtils"%>
 
 

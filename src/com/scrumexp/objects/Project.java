@@ -1,6 +1,9 @@
 package com.scrumexp.objects;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -12,10 +15,10 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
-import login.Usuario;
-
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
-public class Project {
+public class Project implements Serializable {
+
+	private static final long serialVersionUID = 2345459281181991891L;
 
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
@@ -33,24 +36,21 @@ public class Project {
 	@Persistent
 	private Date creationDate;
 
-	@Persistent
+	@Persistent(mappedBy="project")
 	private List<Sprint> sprints;
 	
 	@Persistent (defaultFetchGroup="true")
 	private ProductBacklog productBacklog;
 
-	public Project(String title, String description,List<Sprint> sprints, ProductBacklog productBacklog, Key key) {
+	public Project(String title, String description,List<Sprint> sprints, ProductBacklog productBacklog, Usuario usuario) {
 		super();
 		this.title = title;
 		this.description = description;
 		this.sprints = sprints;
 		this.productBacklog = productBacklog;
 		this.creationDate = new Date();
-		this.setKey(key);
-	}
-
-	public void setKey(Key key) {
-		this.key = key;
+		this.users = new HashSet<Key>();
+		this.addUser(usuario);
 	}
 	
 	public String getTitle() {
@@ -106,16 +106,26 @@ public class Project {
 	}
 	
 	public void addUser(Usuario usuario) {
-		System.out.println("ENTRE");
 		users.add(usuario.getKey());
-		System.out.println("2DA LINEA");
-		usuario.getProjects().add(getKey());
-		System.out.println("ACABE");
+
 	}
 
 	public void removeUser(Usuario usuario) {
 		users.remove(usuario.getKey());
 		usuario.getProjects().remove(getKey());
+	}
+	
+	public List<Story> getUserStories() {
+		if (this.sprints!=null) {
+			List<Story> stories = new ArrayList<Story>();
+			for (Sprint sprint : this.sprints){
+				for (Story story: sprint.getUserStories()) {
+					stories.add(story);
+				}
+			}
+			return stories;
+		}
+		return new ArrayList<Story>();
 	}
 
 }

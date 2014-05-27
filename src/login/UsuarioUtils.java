@@ -1,5 +1,6 @@
 package login;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
@@ -9,18 +10,20 @@ import java.util.*;
 import javax.jdo.Query;
 
 import com.epn.edu.ec.PMF;
+import com.google.appengine.api.datastore.Key;
+import com.scrumexp.objects.Usuario;
 
 public class UsuarioUtils {
 	private static final int FETCH_MAX_RESULTS = 10;
 	
-	public static void insert(final String nombreUsuario,final String emailUsuario, final String contraseniaUsuario) {
+	public static Usuario insert(final String nombreUsuario,final String emailUsuario, final String contraseniaUsuario) {
 		
 		// recuperacion del gestor de persistencia de JDO
 		final PersistenceManager persistenceManager = PMF.get().getPersistenceManager();
 		
 		// creamos un nuevo tutorial y los insertamos en el datastore
 		final Usuario usuario = new Usuario(nombreUsuario,emailUsuario, contraseniaUsuario);		
-		persistenceManager.makePersistent(usuario);
+		return persistenceManager.makePersistent(usuario);
 	}
 	@SuppressWarnings("unchecked")
 	public static List<Usuario> getEntries() {
@@ -68,7 +71,19 @@ public class UsuarioUtils {
 		return null;
 	}
 	
-	/*@SuppressWarnings("unchecked")
-	public*/
+	@SuppressWarnings("unchecked")
+	public static List<Usuario> getUsersBySetOfKeys(Set<Key> keys) {
+		final PersistenceManager pm = PMF.get().getPersistenceManager();
+		final Query q = pm.newQuery(Usuario.class);
+		q.setFilter("key == keyParam");
+		q.declareParameters(Key.class.getName()+" keyParam");
+		List<Usuario> users= new ArrayList<Usuario>();
+		for (Key key : keys) {
+			List<Usuario> tempUser = (List<Usuario>) q.execute(key);
+			if (tempUser!=null && tempUser.size()>0)
+				users.add(tempUser.get(0));
+		}
+		return users;
+	}
 	
 }
