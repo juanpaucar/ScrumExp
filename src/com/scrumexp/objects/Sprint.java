@@ -1,22 +1,26 @@
 package com.scrumexp.objects;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.jdo.annotations.Extension;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
-import javax.jdo.annotations.Order;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+import com.google.appengine.api.datastore.Key;
+
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
-public class Sprint {
+public class Sprint implements Serializable {
 	
+	private static final long serialVersionUID = -4066150790413681556L;
+
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-	private Long id;
+	private Key key;
 	
 	@Persistent
 	private String name;
@@ -28,20 +32,19 @@ public class Sprint {
 	private Date endDate;
 	
 	@Persistent
-	private Project project;
+	private Key project;
 	
 	@Persistent(mappedBy="sprint")
-	@Order(extensions = @Extension(vendorName="datanucleus", key="list-ordering", value="estimatedValue desc"))
 	private List<Story> userStories;
 
-	public Sprint(String name, Date startDate, Date endDate, Project project,
+	public Sprint(int number, Date startDate, Date endDate, Key project,
 			List<Story> userStories) {
 		super();
-		this.name = name;
+		this.name = "Sprint "+number;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.project = project;
-		this.userStories = userStories;
+		this.userStories = new ArrayList<Story>();
 	}
 
 	public String getName() {
@@ -68,11 +71,11 @@ public class Sprint {
 		this.endDate = endDate;
 	}
 
-	public Project getProject() {
+	public Key getProject() {
 		return project;
 	}
 
-	public void setProject(Project project) {
+	public void setProject(Key project) {
 		this.project = project;
 	}
 
@@ -82,6 +85,14 @@ public class Sprint {
 
 	public void setUserStories(List<Story> userStories) {
 		this.userStories = userStories;
+	}
+
+	public Key getKey() {
+		return key;
+	}
+
+	public void setKey(Key key) {
+		this.key = key;
 	}
 	
 }

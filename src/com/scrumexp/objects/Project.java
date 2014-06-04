@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.google.appengine.api.datastore.Key;
+import com.scrumexp.objectsStore.SprintStore;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
@@ -36,17 +37,16 @@ public class Project implements Serializable {
 	@Persistent
 	private Date creationDate;
 
-	@Persistent(mappedBy="project")
-	private List<Sprint> sprints;
+	private Set<Key> sprints;
 	
 	@Persistent (defaultFetchGroup="true")
 	private ProductBacklog productBacklog;
 
-	public Project(String title, String description,List<Sprint> sprints, ProductBacklog productBacklog, Usuario usuario) {
+	public Project(String title, String description,Set<Key> sprints, ProductBacklog productBacklog, Usuario usuario) {
 		super();
 		this.title = title;
 		this.description = description;
-		this.sprints = sprints;
+		this.sprints = new HashSet<Key>();
 		this.productBacklog = productBacklog;
 		this.creationDate = new Date();
 		this.users = new HashSet<Key>();
@@ -72,6 +72,13 @@ public class Project implements Serializable {
 	public Set<Key> getUsers() {
 		return users;
 	}
+	
+	public void addSprint(Sprint sprint) throws NullPointerException {
+		if (this.sprints==null)
+			this.sprints = new HashSet<Key>();
+		System.out.println("HOLAAAAAAAAA:  "+sprint);
+		this.sprints.add(sprint.getKey());
+	}
 
 	public void setUsers(Set<Key> users) {
 		this.users = users;
@@ -85,11 +92,11 @@ public class Project implements Serializable {
 		this.creationDate = creationDate;
 	}
 
-	public List<Sprint> getSprints() {
+	public Set<Key> getSprints() {
 		return sprints;
 	}
 
-	public void setSprints(List<Sprint> sprints) {
+	public void setSprints(Set<Key> sprints) {
 		this.sprints = sprints;
 	}
 
@@ -116,13 +123,30 @@ public class Project implements Serializable {
 	}
 	
 	public List<Story> getUserStories() {
-		if (this.sprints!=null) {
+		if (this.sprints!=null && this.sprints.size()>0) {
 			List<Story> stories = new ArrayList<Story>();
-			for (Sprint sprint : this.sprints){
-				for (Story story: sprint.getUserStories()) {
-					stories.add(story);
+			Sprint sprint;
+			System.out.println("Project.java linea 128");
+			for (Key sprintKey : this.sprints){
+				System.out.println("Project.java linea 130");
+				sprint = SprintStore.getSprintByKey(sprintKey);
+				System.out.println("Project.java linea 132");
+				if (sprint!=null) {
+					System.out.println("Project.java linea 134");
+					System.out.println("SPrint "+sprint.getKey());
+					System.out.println("DEbio ser otro");
+					if (sprint.getUserStories()!=null && sprint.getUserStories().size()>0) { 
+						for (Story story: sprint.getUserStories()) {
+							System.out.println("Project.java linea 136");
+							stories.add(story);
+							System.out.println("Project.java linea 138");
+						}
+					}
+					System.out.println("Project.java linea 140");
 				}
+				System.out.println("Project.java linea 142");
 			}
+			System.out.println("Project.java linea 144");
 			return stories;
 		}
 		return new ArrayList<Story>();

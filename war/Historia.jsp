@@ -86,6 +86,8 @@ $( "#create-user" )
 .button()
 .click(function() {
 $( "#dialog-form" ).dialog( "open" );
+
+
 });
 });
 </script>
@@ -97,8 +99,7 @@ $( "#dialog-form" ).dialog( "open" );
 <p class="validateTips">Todos los campos deben ser llenados</p>
 
 <form  action="/Historia" method="post">
-	
-			
+		
 		<div class="form-group">
 		<label for="nombreHistoria">Nombre de la Historia de Usuario</label><input  class="form-control" id="exampleInputEmail1" type="nombre" name="nombreHistoria">
 		</div>
@@ -116,14 +117,26 @@ $( "#dialog-form" ).dialog( "open" );
 		</div>
 		
 		<div class="form-group">
-		<label for="nombreHistoria">Esfuerzo de la Historia de Usuario:</label><input  class="form-control" id="exampleInputEmail1" type="nombre" name="esfuerzoHistoria">
+		<label for="nombreHistoria">Número de Sprint Historia de Usuario:</label>
+		<BR><SELECT NAME="esfuerzoHistoria">
+			<OPTION>Sprint 1
+			<OPTION>Sprint 2
+			<OPTION>Sprint 3
+			<OPTION>Sprint 4
+			<OPTION>Sprint 5
+			<OPTION>Sprint 6
+			<OPTION>Sprint 7
+			<OPTION>Sprint 8
+			<OPTION>Sprint 9
+			<OPTION>Sprint 10
+		</SELECT > 
 		</div>
 
 	
 	<center>
 	<input type="submit" id="Guardar" value="Guardar">
 	</center>
-	
+		
 </form>
 
 </div>
@@ -138,7 +151,7 @@ $( "#dialog-form" ).dialog( "open" );
 	<td><font color="red"><b>Descripcion de la Historia</b></font></td>
 	<td><font color="red"><b>Prioridad de la Historia</b></font></td>
 	<td><font color="red"><b>Estimacion de la Historia</b></font></td>
-	<td><font color="red"><b>Esfuerzo de la Historia</b></font></td>
+	<td><font color="red"><b>Numero de Sprint de la Historia</b></font></td>
 
 </tr>
 </thead>
@@ -151,8 +164,8 @@ $( "#dialog-form" ).dialog( "open" );
 					for (Historia historia : aux) {
 				%>
 				<tr>
-				<td><%=historia.getNombreHistoria()%></a></td>
-				<td><%=historia.getDescripcionHistoria()%></td>
+				<td ><a href="/Tareas.jsp"><%=historia.getNombreHistoria()%></a><br></td>
+				<td><%=historia.getDescripcionHistoria()%><br></td>
 				<td><%=historia.getPrioridadHistoria()%><br></td>
 				<td><%=historia.getEstimacionHistoria()%><br></td>
 				<td><%=historia.getEsfuerzoHistoria()%><br></td>
@@ -160,21 +173,29 @@ $( "#dialog-form" ).dialog( "open" );
 				<%
 						}
 				%>
+				
+				
+				
 
 </tr>
 </tbody>
 </table>
 </div>
-<button id="create-user">Crear una nueva Historia de Usuario</button>
+
+<button id="create-user">Crear una nueva Historia de Usuario</button><br>
 </body>
-</center>			 
- 
-			  
-<br></br>  
+</center>
+
+<center><br><br><h2>Actualizar Historias de Usuario</h2>
+<form action="Actualizar.jsp"><input type="submit" value="Ir"></form>
+</center> 
+
+	
+<br></br> 
 <br></br>
 
 <center>
-<a href="index.jsp" >Regresar al login</a>
+<a href="Actualizar.jsp" >Regresar al login</a>
 </center>
 
 </html>

@@ -1,10 +1,16 @@
 package historiasUsuario;
 
+import javax.jdo.annotations.Element;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
+
+import java.util.List;
+
+import tareas.Tareas;
+
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class Historia {
 	@PrimaryKey
@@ -20,11 +26,11 @@ public class Historia {
 	private String estimacionHistoria;
 	@Persistent
 	private String esfuerzoHistoria;
-	
-	public Historia(){
-		super();
 		
+	public Historia(){
+		super();		
 	}
+	
 	public Historia(String nombreHistoria, String descripcionHistoria, String prioridadHistoria, String estimacionHistoria, String esfuerzoHistoria){
 		this.nombreHistoria=nombreHistoria;
 		this.descripcionHistoria=descripcionHistoria;
@@ -32,6 +38,7 @@ public class Historia {
 		this.estimacionHistoria=estimacionHistoria;
 		this.esfuerzoHistoria=esfuerzoHistoria;
 	}
+	
 	public Long getId() {
 		return id;
 	}

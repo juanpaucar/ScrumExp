@@ -25,11 +25,15 @@
 		completedPercetage = (int) (size/stories.size()*100.00);
 	}
 	List<Usuario> miembros = UsuarioUtils.getUsersBySetOfKeys(currentProject.getUsers());
-	
-	List<Sprint> sprints =  currentProject.getSprints();
-
-	
+	List<Sprint> sprints =  SprintStore.getSprints(currentProject);
+	String newSprintName = "";
+	if (sprints!= null && sprints.size()>0)
+		 newSprintName = "Sprint "+(sprints.size()+1);
+	else
+		newSprintName = "Sprint 1";
+	System.out.println(newSprintName);
 %>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -80,7 +84,7 @@
 							<a href="#">Inicio</a>
 						</li>
 						<li>
-							<a href="./product.html">Product Backlog</a>
+							<a href="./Historia.jsp">Product Backlog</a>
 						</li>
 						<li>
 							<a href="#">Sprint Backlog</a>
@@ -120,16 +124,27 @@
 				<div class="panel-body">
 					<p><strong>Sprints</strong></p>
 					<p>
-						<%if (sprints!=null && sprints.size()>0) {%>
+						<%
+						System.out.println("WEY LLEGUE AL IF DE LOS SPRINTS");
+		  				System.out.println(sprints);
+						if (sprints!=null && sprints.size()>0) {%>
 							<ul>
-								<%for (Sprint sprint: sprints)  {%>
+								<%System.out.println("ME FUI POR EL SI");
+								for (Sprint sprint: sprints)  {%>
 									<li><%=sprint.getName()%></li>
 								<%} %>
 							</ul>
 							<%} 
 							else {%>
 								<strong>NO TIENE SPRINTS TODAVIA</strong>
-							<%} %>
+								<%System.out.println("ME FUI POR EL ELSE"); %>
+							<%} 
+							System.out.println("WEY PASE EL IF DE LOS SPRINTS");
+							%>
+					</p>
+					<p>
+						
+							<a id="modal-857527" href="#newSprintModal" role="button" class="btn btn-success" data-toggle="modal"><em class="glyphicon glyphicon-plus"><strong> Nuevo Sprint</strong></em></a>
 					</p>
 				</div>
 				<div class="panel-body">
@@ -154,6 +169,42 @@
 				</div>
 			</div>
 		</div>
+		<div id="new-sprint-modal">
+					<div class="modal fade" id="newSprintModal" role="dialog" aria-labelledby="newSprintLabel" aria-hidden="true" tabindex="-1">
+						<form class="modal-form modal-dialog form" action="/nsprint" method="post" >
+							
+							<div class="modal-content">
+								<div class="modal-header">
+									 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+									<h4 class="modal-title" id="newSprintModalLabel">
+										Nuevo Sprint
+									</h4>
+								</div>
+								<div class="modal-body">
+										<p>
+						 					<label for="new-sprint-name" >Nombre</label>
+						 					<input type="text" class="form-control" id="new-sprint-name" value="<%=newSprintName%>" disabled="disabled">
+										</p>
+										<p>
+											<label for="new-sprint-start-date" >Fecha de inicio</label>
+						 					<input type="text" class="form-control" name="new-sprint-start-date">DD/MM/AAAA
+										</p>
+										<p>
+											<label for="new-sprint-end-date" >Fecha de fin</label>
+						 					<input type="text" class="form-control" name="new-sprint-end-date">DD/MM/AAAA
+										</p>
+										
+										
+								</div>
+								<div class="modal-footer">
+									 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button> <button type="submit" class="btn btn-primary">ENVIAR</button>
+								</div>
+							</div>
+							
+						</form>
+						
+					</div>
+				</div>
 		<br><br><br>
 		<div class="col-md-4 column">
 			<p>

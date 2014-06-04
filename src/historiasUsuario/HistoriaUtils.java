@@ -1,9 +1,11 @@
 package historiasUsuario;
 
+
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
+
 
 
 public class HistoriaUtils {
@@ -26,5 +28,29 @@ public class HistoriaUtils {
 	 query.setRange(0, FETCH_MAX_RESULTS);
 	 return (List<Historia>) query.execute();
 	}
+	
+	@SuppressWarnings("unchecked") 
+	public static Historia actualizarHistoria(String nombreHistoria, String descripcionHistoria, String prioridadHistoria, String estimacionHistoria, String esfuerzoHistoria ) { 
+				
+		final PersistenceManager persistenceManager = PMF.get().getPersistenceManager(); 
+		
+				String query = " select from " + 
+				Historia.class.getName() +
+				" where nombreHistoria == '" +
+				nombreHistoria+ "'" ;				
+				List<Historia> historia = (List<Historia>)persistenceManager.newQuery(query).execute(); 
+				if(historia.size()>=1) {
+					Historia his = historia.get(0);
+					his.setDescripcionHistoria(descripcionHistoria);
+					his.setEsfuerzoHistoria(esfuerzoHistoria);
+					his.setEstimacionHistoria(estimacionHistoria);
+					his.setPrioridadHistoria(prioridadHistoria);
+					
+				}
+				
+				return null;
+						
+	}
+	
 	
 }

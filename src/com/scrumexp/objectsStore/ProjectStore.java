@@ -23,23 +23,28 @@ public class ProjectStore {
 	public static List<Project> getEntries(Usuario usuario) {
 		final PersistenceManager persistenceManager = PMF.get().getPersistenceManager();
 		final Query query = persistenceManager.newQuery(Project.class);
-		List<Project> projects = (List<Project>) query.execute();;
-		Key userKey=usuario.getKey();
-		
-		if (projects!=null && projects.size()>0) {
-			List<Project> userProjects = new ArrayList<Project>();
-			for (Project project : projects) {
-				for (Key key : project.getUsers()) {
-					if (key.equals(userKey)) {
-						userProjects.add(project);
-						break;
+		try {
+			List<Project> projects = (List<Project>) query.execute();;
+			Key userKey=usuario.getKey();
+			if (projects!=null && projects.size()>0) {
+				List<Project> userProjects = new ArrayList<Project>();
+				for (Project project : projects) {
+					for (Key key : project.getUsers()) {
+						if (key.equals(userKey)) {
+							userProjects.add(project);
+							break;
+						}
 					}
 				}
+				return userProjects;			
 			}
-			return userProjects;			
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		else
-			return new ArrayList<Project>(); //actually would be an empty list
+		finally {
+			persistenceManager.close();
+		}
+		return new ArrayList<Project>(); //actually would be an empty list
 	}
 	
 	@SuppressWarnings("uncheked")
@@ -48,9 +53,16 @@ public class ProjectStore {
 		final Query query = persistenceManager.newQuery(Project.class);
 		query.setFilter("key == keyParam");
 		query.declareParameters(Key.class.getName() + " keyParam");
-		List<Project> projects = (List<Project>) query.execute(projectKey);
-		if (projects.size()>=1)
-			return projects.get(0);
+		try {
+			List<Project> projects = (List<Project>) query.execute(projectKey);
+			if (projects!= null && projects.size()>=1)
+				return projects.get(0);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			persistenceManager.close();
+		}
+ 		
 		return null;
 	}
 	
@@ -66,11 +78,16 @@ public class ProjectStore {
 	@SuppressWarnings("unchecked")
 	public static Project getProjectByTitle(String title, Usuario usuario) {
 		List<Project> projects = getEntries(usuario);
-		for (Project project : projects) 
-			if (project.getTitle().equals(title))
-				return project;
+		if (projects!=null && projects.size()>0) {
+			for (Project project : projects) {
+				if (project.getTitle().equals(title)) {
+					return project;
+				}
+			}
+		}
 		return null;
 	}
 
-	
+
+
 }

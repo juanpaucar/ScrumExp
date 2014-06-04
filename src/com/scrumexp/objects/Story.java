@@ -9,12 +9,14 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+import com.google.appengine.api.datastore.Key;
+
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class Story {
 
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-	private Long id;
+	private Key key;
 	
 	@Persistent
 	private String title;
@@ -104,12 +106,8 @@ public class Story {
 		this.productBacklog = productBacklog;
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
+	public Key getId() {
+		return this.key;
 	}
 
 	public String getAcceptanceCriteria() {

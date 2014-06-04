@@ -25,5 +25,8 @@ public class HistoriaServlet extends HttpServlet {
 	// TODO Auto-generated method stub
 	HistoriaUtils.insert(parameter,parameter2,parameter3,parameter4,parameter5);
 	}
+	
+	
 
 }
+

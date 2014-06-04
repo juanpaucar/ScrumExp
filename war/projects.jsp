@@ -153,7 +153,7 @@
 										</p>
 										<p>
 						 					<label for="description">Descripcion</label>
-						 					<input type="textarea" class="form-control" name="description" />
+						 					<textarea  class="form-control" name="description" row="3"></textarea>
 										</p>
 
 

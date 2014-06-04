@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>ScrumeXp</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+	<!--link rel="stylesheet/less" href="less/bootstrap.less" type="text/css" /-->
+	<!--link rel="stylesheet/less" href="less/responsive.less" type="text/css" /-->
+	<!--script src="js/less-1.3.3.min.js"></script-->
+	<!--append ‘#!watch’ to the browser URL, then refresh the page. -->
+	
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+  <![endif]-->
+
+  <!-- Fav and touch icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57-precomposed.png">
+  <link rel="shortcut icon" href="img/favicon.png">
+  
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/scripts.js"></script>
+
+
+	<!--for datepicker-->
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+  	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  	<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+  	<link rel="stylesheet" href="/resources/demos/style.css">
+ 	<script>
+		$(function() {
+    		$( "#datepicker" ).datepicker();
+  		});
+  	</script>
+  	<script type="text/javascript">
+  		function cambiarNumero(number) {
+  			document.getElementById('deleteStoryModalLabel').innerHTML="Eliminar la Historia de Usuario "+number;
+  			document.getElementById('editStoryModalLabel').innerHTML="Editar la Historia de Usuario "+number;
+  			document.getElementsByName('delete-story-title').value="Titulo de la Historia de usuario "+number;
+  			document.getElementsByName('delete-story-description').value="Descripcion de la Historia de usuario "+number;
+  			document.getElementsByName('delete-story-sprint').value="Sprint "+0;
+  			document.getElementsByName('delete-story-acriteria').value="Criterios de acpetacion de la historia de usuario "+number;
+  			document.getElementsByName('delete-story-value').value=1;
+  			document.getElementsByName('delete-story-work').value=5;
+  			document.getElementsByName('delete-story-accomplished').value = true;
+  			document.getElementsByName('edit-story-title').value="Titulo de la Historia de usuario "+number;
+  			document.getElementsByName('edit-story-description').value="Descripcion de la Historia de usuario "+number;
+  			document.getElementsByName('edit-story-sprint').value="Sprint "+0;
+  			document.getElementsByName('edit-story-acriteria').value="Criterios de acpetacion de la historia de usuario "+number;
+  			document.getElementsByName('edit-story-value').value=1;
+  			document.getElementsByName('edit-story-work').value=5;
+  			document.getElementsByName('edit-story-accomplished').value = true;
+  		
+  		}
+  	</script>
+</head>
+
+<body>
+
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-8 column">
+			<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+				<div class="navbar-header">
+					 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="#">ScrumeXp</a>
+				</div>
+				
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li>
+							<a href="./index.html">Inicio</a>
+						</li>
+						<li class="active">
+							<a href="#">Product Backlog</a>
+						</li>
+						<li>
+							<a href="#">Sprint Backlog</a>
+						</li>
+						<li>
+							<a href="#">Tareas pendientes</a>
+						</li>
+					</ul>
+				
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<a href="./principal.html">Principal</a>
+						</li>
+						
+					</ul>
+				</div>
+				
+			</nav>
+			<br><br><br>
+
+			<div class="page-header">
+				<h1>
+					PRODUCT BACKLOG <small><%=currentProject%></small>
+				</h1>
+			</div>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>
+							#
+						</th>
+						<th>
+							Titulo
+						</th>
+						<th>
+							Valor
+						</th>
+						<th>
+							Esfuerzo
+						</th>
+						<th>
+
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							1
+						</td>
+						<td>
+							Historia de usuario 1
+						</td>
+						<td>
+							1
+						</td>
+						<td>
+							5
+						</td>
+						<td>
+							<div class="btn-group btn-group-xs">
+								<button class="btn btn-default" type="button" data-toggle="modal" data-target="#editStoryModal" onClick="cambiarNumero(1);"><em class="glyphicon glyphicon-pencil"></em></button> 
+				 				<button class="btn btn-default" type="button" data-toggle="modal" data-target="#deleteStoryModal" onClick="cambiarNumero(1);"><em class="glyphicon glyphicon-remove"></em></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							2
+						</td>
+						<td>
+							Historia de usuario 2
+						</td>
+						<td>
+							1
+						</td>
+						<td>
+							10
+						</td>
+						<td>
+							<div class="btn-group btn-group-xs">
+								<button class="btn btn-default" type="button" data-toggle="modal" data-target="#editStoryModal" onClick="cambiarNumero(2);"><em class="glyphicon glyphicon-pencil"></em></button> 
+				 				<button class="btn btn-default" type="button" data-toggle="modal" data-target="#deleteStoryModal" onClick="cambiarNumero(2);"><em class="glyphicon glyphicon-remove"></em></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							3
+						</td>
+						<td>
+							Historia de usuario 3
+						</td>
+						<td>
+							3
+						</td>
+						<td>
+							6
+						</td>
+						<td>
+							<div class="btn-group btn-group-xs">
+								<button class="btn btn-default" type="button" data-toggle="modal" data-target="#editStoryModal" onClick="cambiarNumero(3);"><em class="glyphicon glyphicon-pencil"></em></button> 
+				 				<button class="btn btn-default" type="button" data-toggle="modal" data-target="#deleteStoryModal" onClick="cambiarNumero(3);"><em class="glyphicon glyphicon-remove"></em></button>
+							</div>
+						</td>
+					</tr>
+
+				</tbody>
+			</table>
+			<div id="modals">
+				<div id="editing-story-modal">
+					<!--MODALS-->
+					<div class="modal fade" id="editStoryModal" role="dialog" aria-labelledby="editStoryLabel" aria-hidden="true" tabindex="-1">
+						<form class="modal-form modal-dialog form" action="/nproject" method="post" >
+							<div class="modal-content">
+								<div class="modal-header">
+									 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+									<h4 class="modal-title" id="editStoryModalLabel">
+										Editar la Historia de Usuario <p id="nhistoriae"> </p>
+									</h4>
+								</div>
+								<div class="modal-body">
+										<p>
+						 					<label for="new-story-title">Titulo</label>
+						 					<input type="text" class="form-control" id="edit-story-title" />
+										</p>
+										<p>
+						 					<label for="new-story-description">Descripcion</label>
+						 					<textarea type="textarea" class="form-control" id="edit-story-description" rows="3"></textarea>
+										</p>
+										<p>
+											<label for="new-story-sprint" >Seleccione Sprint</label>
+											<select class="form-control" id="edit-story-sprint">
+											  <option>Sprint 0 (planeacion)</option>
+											  <option>Sprint 1</option>
+											  <option>Sprint 2</option>
+											  <option>Sprint 3</option>
+											</select>
+										</p>
+										<p>
+						 					<label for="new-story-acriteria">Descripcion</label>
+						 					<textarea type="textarea" class="form-control" id="edit-story-acriteria" rows="3"></textarea>
+						 					<br>
+										</p>
+										<p>
+											<div class="form-group">
+												<label for ="new-story-value" class="col-sm-2 control-label">Valor Estimado</label>
+												<div class="col-sm-2">
+													<input type="number" class="form-control" id="edit-story-value" placaholder="Valor Estimado">
+												</div>
+												<label for ="new-story-work" class="col-sm-2 control-label">Esfuerzo Estimado</label>
+												<div class="col-sm-2">
+													<input type="number" class="form-control" id="edit-story-work" placaholder="Esfuerzo Estimado">
+												</div>
+												<label for ="new-story-accomplished" class="col-sm-2 control-label">Completada</label>
+												<div class="col-sm-2">
+													<input type="checkbox" class="form-control" id="edit-story-accomplished" placaholder="Completada">
+												</div>											
+											</div>
+										</p>	
+								</div>
+								<div class="modal-footer">
+									 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button> <button type="button" class="btn btn-primary">Guardar</button>
+								</div>
+							</div>
+							
+						</form>
+						
+					</div>
+				</div>
+				<div id="deleting-story-modal"> 
+					<div class="modal fade" id="deleteStoryModal" role="dialog" aria-labelledby="deleteStoryLabel" aria-hidden="true" tabindex="-1">
+						<form class="modal-form modal-dialog form" action="/deleteStory" method="post" >
+							
+							<div class="modal-content">
+								<div class="modal-header">
+									 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+									<h4 class="modal-title" id="deleteStoryModalLabel">
+										Eliminar Historia de Usuario <p id="nhistoriab"> </p>
+									</h4>
+								</div>
+								<div class="modal-body">
+									<fieldset disabled>
+										<p>
+						 					<label for="delete-story-title">Titulo</label>
+						 					<input type="text" class="form-control" id="delete-story-title" />
+										</p>
+										<p>
+						 					<label for="new-story-description">Descripcion</label>
+						 					<textarea type="textarea" class="form-control" id="delete-story-description" rows="3"></textarea>
+										</p>
+										<p>
+											<label for="new-story-sprint" >Seleccione Sprint</label>
+											<select class="form-control" id="delete-story-sprint">
+											  <option>Sprint 0 (planeacion)</option>
+											  <option>Sprint 1</option>
+											  <option>Sprint 2</option>
+											  <option>Sprint 3</option>
+											</select>
+										</p>
+										<p>
+						 					<label for="new-story-acriteria">Descripcion</label>
+						 					<textarea type="textarea" class="form-control" id="delete-story-acriteria" rows="3"></textarea>
+						 					<br>
+										</p>
+										<p>
+											<div class="form-group">
+												<label for ="new-story-value" class="col-sm-2 control-label">Valor Estimado</label>
+												<div class="col-sm-2">
+													<input type="number" class="form-control" id="delete-story-value" placaholder="Valor Estimado">
+												</div>
+												<label for ="new-story-work" class="col-sm-2 control-label">Esfuerzo Estimado</label>
+												<div class="col-sm-2">
+													<input type="number" class="form-control" id="delete-story-work" placaholder="Esfuerzo Estimado">
+												</div>
+												<label for ="new-story-accomplished" class="col-sm-2 control-label">Completada</label>
+												<div class="col-sm-2">
+													<input type="checkbox" class="form-control" id="delete-story-accomplished" placaholder="Completada">
+												</div>											
+											</div>
+										</p>
+									</fieldset>	
+								</div>
+								<div class="modal-footer">
+									 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button> <button type="button" class="btn btn-danger">ELIMINAR</button>
+								</div>
+							</div>
+							
+						</form>
+						
+					</div>
+				</div>
+
+			</div>
+			<div class="btn-group btn-group-lg">
+				 <button class="btn btn-default" type="button" data-toggle="modal" data-target="#newStoryModal"><em class="glyphicon glyphicon-plus"></em> Nueva Historia</button> 
+					<div class="modal fade" id="newStoryModal" role="dialog" aria-labelledby="newStoryLabel" aria-hidden="true" tabindex="-1">
+						<form class="modal-form modal-dialog form" action="/nproject" method="post" >
+							<div class="modal-content">
+								<div class="modal-header">
+									 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+									<h4 class="modal-title" id="newStoryModalLabel">
+										Nueva Historia de Usuario
+									</h4>
+								</div>
+								<div class="modal-body">
+										<p>
+						 					<label for="new-story-title">Titulo</label>
+						 					<input type="text" class="form-control" name="new-story-title" />
+										</p>
+										<p>
+						 					<label for="new-story-description">Descripcion</label>
+						 					<textarea type="textarea" class="form-control" name="new-story-description" rows="3"></textarea>
+										</p>
+										<p>
+											<label for="new-story-sprint" >Seleccione Sprint</label>
+											<select class="form-control" name="new-story-sprint">
+											  <option>Sprint 0 (planeacion)</option>
+											  <option>Sprint 1</option>
+											  <option>Sprint 2</option>
+											  <option>Sprint 3</option>
+											</select>
+										</p>
+										<p>
+						 					<label for="new-story-acriteria">Descripcion</label>
+						 					<textarea type="textarea" class="form-control" name="new-story-acriteria" rows="3"></textarea>
+						 					<br>
+										</p>
+										<p>
+											<div class="form-group">
+												<label for ="new-story-value" class="col-sm-2 control-label">Valor Estimado</label>
+												<div class="col-sm-2">
+													<input type="number" class="form-control" name="new-story-value" placaholder="Valor Estimado">
+												</div>
+												<label for ="new-story-work" class="col-sm-2 control-label">Esfuerzo Estimado</label>
+												<div class="col-sm-2">
+													<input type="number" class="form-control" name="new-story-work" placaholder="Esfuerzo Estimado">
+												</div>
+												<label for ="new-story-accomplished" class="col-sm-2 control-label">Completada</label>
+												<div class="col-sm-2">
+													<input type="checkbox" class="form-control" name="new-story-accomplished" placaholder="Completada">
+												</div>											
+											</div>
+										</p>	
+								</div>
+								<div class="modal-footer">
+									 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button> <button type="button" class="btn btn-primary">Guardar</button>
+								</div>
+							</div>
+							
+						</form>
+						
+					</div>
+			</div>
+			<br><br>
+			<div class="btn-group btn-group-sm">
+				 <button class="btn btn-default" type="button"><em class="glyphicon glyphicon-sort"></em> Invertir orden</button> 
+				 <button class="btn btn-default" type="button"><em class="glyphicon glyphicon-th-list"></em> Modificar criterio de ordenacion</button> 
+			</div>
+
+		</div>
+		<br><br><br>
+		<div class="col-md-4 column">
+			<p>
+				<img src="./img/ScrumeXpLOGO.png" class="img-rounded" align="left">
+			</p>
+			<div class="page-header">
+				<h1>
+					NOMBRE DEL PROYECTO<br><small>NOMBRE DEL USUARIO</small>
+				</h1>
+			</div>
+			<p>
+				<strong>Miembros:</strong><br>
+				<ul>
+					<li>Miembro 1</li>
+					<li>Miembro 2</li>
+					<li>Miembro 3</li>
+					<li>Miembro 4</li>
+					<li>Miembro 5</li>
+				</ul>
+			</p>
+			<p>
+				<small>Porcentage completado</small>
+				<div class="progress active" aria-valuemin="0" aria-valuemax="100">
+					<div class="progress-bar progress-success" style="width: 50%;">50%</div>
+				</div>
+			</p>
+			<p>
+				<small>Tiempo usado</small>
+				<div class="progress active" aria-valuemin="0" aria-valuemax="100">
+					<div class="progress-bar progress-success" style="width: 75%;">75%</div>
+				</div>
+			</p>
+		</div>
+	</div>
+</div>
+</body>
+</html>
