@@ -46,20 +46,20 @@
   		function cambiarNumero(number) {
   			document.getElementById('deleteStoryModalLabel').innerHTML="Eliminar la Historia de Usuario "+number;
   			document.getElementById('editStoryModalLabel').innerHTML="Editar la Historia de Usuario "+number;
-  			document.getElementsByName('delete-story-title').value="Titulo de la Historia de usuario "+number;
-  			document.getElementsByName('delete-story-description').value="Descripcion de la Historia de usuario "+number;
-  			document.getElementsByName('delete-story-sprint').value="Sprint "+0;
-  			document.getElementsByName('delete-story-acriteria').value="Criterios de acpetacion de la historia de usuario "+number;
-  			document.getElementsByName('delete-story-value').value=1;
-  			document.getElementsByName('delete-story-work').value=5;
-  			document.getElementsByName('delete-story-accomplished').value = true;
-  			document.getElementsByName('edit-story-title').value="Titulo de la Historia de usuario "+number;
-  			document.getElementsByName('edit-story-description').value="Descripcion de la Historia de usuario "+number;
-  			document.getElementsByName('edit-story-sprint').value="Sprint "+0;
-  			document.getElementsByName('edit-story-acriteria').value="Criterios de acpetacion de la historia de usuario "+number;
-  			document.getElementsByName('edit-story-value').value=1;
-  			document.getElementsByName('edit-story-work').value=5;
-  			document.getElementsByName('edit-story-accomplished').value = true;
+  			document.getElementsByName('delete-story-title')[0].value="Titulo de la Historia de usuario "+number;
+  			document.getElementsByName('delete-story-description')[0].value="Descripcion de la Historia de usuario "+number;
+  			document.getElementsByName('delete-story-sprint')[0].value="Sprint "+0;
+  			document.getElementsByName('delete-story-acriteria')[0].value="Criterios de acpetacion de la historia de usuario "+number;
+  			document.getElementsByName('delete-story-value')[0].value=1;
+  			document.getElementsByName('delete-story-work')[0].value=5;
+  			document.getElementsByName('delete-story-accomplished')[0].value = true;
+  			document.getElementsByName('edit-story-title')[0].value="Titulo de la Historia de usuario "+number;
+  			document.getElementsByName('edit-story-description')[0].value="Descripcion de la Historia de usuario "+number;
+  			document.getElementsByName('edit-story-sprint')[0].value="Sprint "+0;
+  			document.getElementsByName('edit-story-acriteria')[0].value="Criterios de acpetacion de la historia de usuario "+number;
+  			document.getElementsByName('edit-story-value')[0].value=1;
+  			document.getElementsByName('edit-story-work')[0].value=5;
+  			document.getElementsByName('edit-story-accomplished')[0].value = true;
   		
   		}
   	</script>
